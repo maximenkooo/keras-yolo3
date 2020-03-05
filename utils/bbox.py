@@ -57,10 +57,24 @@ def bbox_iou(box1, box2):
     return float(intersect) / union
 
 def draw_boxes(image, boxes, labels, obj_thresh, quiet=True):
+    # "TODO: fix labels mapping"
+    d = {'Shorts':'Coat', 'Dress':'Dress', 'Coat':'Jacket', 'Suit':'Jeans', 'Skirt':'Shorts', 'Jacket':'Skirt', 'Jeans':'Suit', 'Swimwear':'Swimwear'}
+    labels  = [d[i] for i in labels]
+
     for box in boxes:
         label_str = ''
         label = -1
         
+#         лейбл джинсы - (костюм)!
+# пиджак - юбка!
+# шорты - пальто !
+# платье -платье!
+# костюм - джинсы!
+# юбка - шорты!
+# пальто - пиджак
+# купальник - купальник!
+          
+
         for i in range(len(labels)):
             if box.classes[i] > obj_thresh:
                 if label_str != '': label_str += ', '
